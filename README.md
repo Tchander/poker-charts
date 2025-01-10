@@ -1,4 +1,4 @@
-# iam-frontend
+# Poker Charts
 
 Запуск проекта:
 ```
