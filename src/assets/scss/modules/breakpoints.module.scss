@@ -1,0 +1,9 @@
+// use нужен для генерации деклараций
+@use '../variables/breakpoints' as br;
+
+
+:export {
+  @each $key, $value in br.$breakpoints {
+    #{$key}: $value;
+  }
+}

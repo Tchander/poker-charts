@@ -1,0 +1,10 @@
+@use "sass:meta";
+@use '../variables/fonts';
+@use '../functions/remove-prefix-from-var-name' as *;
+
+:export {
+  @each $key, $value in meta.module-variables("fonts") {
+    // Все, кроме перменных толщины приводим к нижнему регистру
+    #{if(str-index($key, 'Weight') == null, remove-prefix-from-var-name($key, 'font', true), remove-prefix-from-var-name($key, 'font'))}: $value;
+  }
+}

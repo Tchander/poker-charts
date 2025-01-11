@@ -1,0 +1,9 @@
+@use "sass:meta";
+@use '../variables/borderRadius';
+@use '../functions/remove-prefix-from-var-name' as *;
+
+:export {
+  @each $key, $value in meta.module-variables("borderRadius") {
+    #{remove-prefix-from-var-name($key, 'borderRadius', true)}: $value;
+  }
+}
