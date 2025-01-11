@@ -1,0 +1,30 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+  color: $colorText;
+  background-color: $colorWhite;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.layout-default {
+  display: flex;
+  flex-direction: column;
+  padding: 54px 120px;
+
+  @include media-down(xl) {
+    padding: 54px 48px;
+  }
+
+  @include media-down(lg) {
+    padding: 54px 32px;
+  }
+
+  @include media-down(md) {
+    padding: 54px 20px;
+  }
+}
