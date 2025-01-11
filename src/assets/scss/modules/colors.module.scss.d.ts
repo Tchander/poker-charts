@@ -4,6 +4,7 @@ export declare const colorBorder: string;
 export declare const colorCyan: string;
 export declare const colorDarkBlue: string;
 export declare const colorDarkGreen: string;
+export declare const colorGray: string;
 export declare const colorGreen: string;
 export declare const colorLightBlue: string;
 export declare const colorLightGreen: string;
