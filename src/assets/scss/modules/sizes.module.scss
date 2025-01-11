@@ -1,0 +1,9 @@
+@use "sass:meta";
+@use '../variables/sizes';
+@use '../functions/remove-prefix-from-var-name' as *;
+
+:export {
+  @each $key, $value in meta.module-variables("sizes") {
+    #{remove-prefix-from-var-name($key, 'size', true)}: $value;
+  }
+}

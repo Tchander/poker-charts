@@ -1,0 +1,13 @@
+export declare const base: string;
+export declare const heading1: string;
+export declare const heading2: string;
+export declare const heading3: string;
+export declare const heading4: string;
+export declare const heading5: string;
+export declare const lg: string;
+export declare const name: string;
+export declare const sm: string;
+export declare const weightItalic: string;
+export declare const weightNormal: string;
+export declare const weightStrong: string;
+export declare const xl: string;

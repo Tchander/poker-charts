@@ -4,6 +4,7 @@
     "outDir": "./dist/",
     "paths": {
       "@modules/*": ["src/assets/scss/modules/*"],
+      "@ui/*": ["src/components/common/*"],
       "@/*": ["src/*"],
     },
     "sourceMap": true,

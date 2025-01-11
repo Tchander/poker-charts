@@ -1,0 +1,16 @@
+@use "sass:meta";
+@use "sass:map";
+@use '../variables/spaces/margins';
+@use '../functions/remove-prefix-from-var-name' as *;
+
+$mapModule: ();
+
+@each $k, $v in meta.module-variables("margins") {
+  $mapModule: map.set($mapModule, remove-prefix-from-var-name($k, 'margin', true), $v);
+}
+
+:export {
+  @each $key, $value in $mapModule {
+    #{$key}: $value;
+  }
+}

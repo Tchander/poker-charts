@@ -1,0 +1,38 @@
+@use './variables/fonts';
+
+@import "mixins/fonts";
+
+$ext: woff2;
+$display: swap;
+$fontName: fonts.$fontName;
+
+// Paths
+$fontFileBaseName: "GolosText";
+$fontFileBasePath: "@/assets/fonts/#{$fontName}/#{$ext}";
+$fontFilePath: "#{$fontFileBasePath}/#{$fontFileBaseName}";
+
+// 400
+@include font-face($fontName, "#{$fontFilePath}-Regular", 400, normal, $ext, $display);
+
+// 500
+@include font-face($fontName, "#{$fontFilePath}-Medium", 500, normal, $ext, $display);
+
+// 600
+@include font-face($fontName, "#{$fontFilePath}-SemiBold", 600, normal, $ext, $display);
+
+// 700
+@include font-face($fontName, "#{$fontFilePath}-Bold", 700, normal, $ext, $display);
+
+// 800
+@include font-face($fontName, "#{$fontFilePath}-ExtraBold", 800, normal, $ext, $display);
+
+// 900
+@include font-face($fontName, "#{$fontFilePath}-Black", 900, normal, $ext, $display);
+
+// --------------
+
+
+// 400
+// .font-400-12-18 {
+//   @include font(400, 12px, 18px);
+// }
