@@ -1,11 +1,11 @@
 <template>
   <div>
     <NInput
-      v-model:value="label"
+      v-model:value="title"
       type="text"
     />
     <NButton
-      :disabled="!label"
+      :disabled="!title"
       @click="addLabel"
     >
       Add data
@@ -19,9 +19,13 @@
 <script lang="ts" setup>
 import { NButton, NInput } from 'naive-ui';
 import { ref } from 'vue';
+import { cloneDeep } from 'lodash-es';
+import { chartDefault } from '@/utils/pokerChart';
+import type { ChartCategory } from '@/types/pokerChart';
 
-const label = ref<string | null>(null);
-const dbName = 'pokerChartLabels';
+const title = ref<string>('');
+const dbName = 'pokerCharts';
+const storeName = 'charts';
 
 function openPokerChartsLabelsDb() {
   const request = indexedDB.open(dbName, 1);
@@ -29,8 +33,8 @@ function openPokerChartsLabelsDb() {
   request.onupgradeneeded = (event) => {
     const db = (event.target as IDBOpenDBRequest).result;
 
-    if (!db.objectStoreNames.contains('labels')) {
-      db.createObjectStore('labels', { keyPath: 'id', autoIncrement: true });
+    if (!db.objectStoreNames.contains(storeName)) {
+      db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
     }
   };
 
@@ -49,17 +53,22 @@ function addLabel() {
   request.onsuccess = () => {
     const db = request.result;
 
-    const transaction = db.transaction(['labels'], 'readwrite');
-    const labelsStore = transaction.objectStore('labels');
+    const transaction = db.transaction([storeName], 'readwrite');
+    const chartsStore = transaction.objectStore(storeName);
 
-    labelsStore.add({ label: label.value });
+    const newCategory: ChartCategory = {
+      chart: cloneDeep(chartDefault),
+      title: title.value,
+    };
+
+    chartsStore.add(newCategory);
 
     transaction.oncomplete = () => {
-      console.log('Лейбел добавлен');
+      console.log('Чарт добавлен');
     };
 
     transaction.onerror = () => {
-      console.error('Ошибка при добавлении лейбла');
+      console.error('Ошибка при добавлении чарта');
     };
   };
 }
@@ -70,17 +79,17 @@ function getAll() {
   request.onsuccess = () => {
     const db = request.result;
 
-    const transaction = db.transaction(['labels'], 'readonly');
-    const labelsStore = transaction.objectStore('labels');
+    const transaction = db.transaction([storeName], 'readonly');
+    const chartsStore = transaction.objectStore(storeName);
 
-    const getAllRequest = labelsStore.getAll();
+    const getAllRequest: IDBRequest<ChartCategory[]> = chartsStore.getAll();
 
     getAllRequest.onsuccess = () => {
-      console.log('Все лейблы:', getAllRequest.result);
+      console.log('Все чарты:', getAllRequest.result);
     };
 
     getAllRequest.onerror = () => {
-      console.error('Ошибка при получении лейблов');
+      console.error('Ошибка при получении чартов');
     };
   };
 }
