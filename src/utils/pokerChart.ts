@@ -1,4 +1,4 @@
-import type { Chart } from '@/types/pokerChart';
+import type { Chart } from '@/stores/charts';
 
 export const chartDefault: Chart = [
   // 1 row (A)
